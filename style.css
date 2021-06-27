@@ -1,6 +1,6 @@
 *{
     font-family: sans-serif;
-    background-color: darkgrey;
+    background-color: dimgray;
 }
 
 .grid-container{
@@ -12,7 +12,7 @@
 }
 
 .number{
-    background-color: darkslategray !important; 
+    background-color: darkgray !important; 
 }
 
 .grid-item{
@@ -21,6 +21,11 @@
     text-align: center;
     font-size: 20px;
     font-size: 2.5vw;
+}
+
+.grid-item:hover{
+    cursor: pointer;
+    font-weight: 900;
 }
 
 #numpad{

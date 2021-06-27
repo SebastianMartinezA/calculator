@@ -27,3 +27,18 @@ function multiply(a, b){
 function divide(a, b){
     return a/b;
 }
+
+document.addEventListener('click', function(e){
+    populateDisplay(e.target.id);
+});
+
+function populateDisplay(id){
+    let display = document.getElementById("numpad");
+    display.textContent += id;
+    let displayContent = display.textContent;
+    console.log(id);
+    if(!isNaN(parseInt(id))){
+        console.log("hello");
+        //document.getElementById(id).disabled = true;
+    }
+}
