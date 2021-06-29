@@ -1,3 +1,11 @@
+let firstNumber = null;
+let secondNumber = null;
+let firstOperator = null;
+let result = null;
+let displayValue = 0;
+
+updateDisplay();
+
 function operate(op, a, b){
     if(op === '+'){
         return a + b;
@@ -10,25 +18,36 @@ function operate(op, a, b){
     }
 }
 
-
 document.addEventListener('click', function(e){
     populateDisplay(e.target.id);
 });
 
 function populateDisplay(id){
-    let display = document.getElementById("numpad"); //gets the numpad element
-    
-    if(isNaN(parseInt(id))){ // if its not a number enters
-        display.textContent += " " + id + " ";
-        document.getElementById("x").disabled = true;
-        document.getElementById("/").disabled = true;
-        document.getElementById("+").disabled = true;
-        document.getElementById("-").disabled = true;
+    if(firstOperator === null && (isNaN(parseInt(id)))){
+        firstOperator = id;
     }
-    else{   // else if it is a number entes and adds to display text
-        display.textContent += id;
+    else{
+        if(firstOperator!=null){
+            if(id === "="){
+                result = operate(firstOperator, parseInt(firstNumber), parseInt(secondNumber));
+                displayValue = result;
+                updateDisplay();
+            }
+            else{
+                secondNumber = id;
+                displayValue = secondNumber;
+                updateDisplay();
+            }
+        }
+        else{
+            firstNumber = id;
+            displayValue = firstNumber;
+            updateDisplay();
+        }
     }
+}
 
-    let displayContent = display.textContent; // saves display value
-    console.log(displayContent);
+function updateDisplay(){
+    let display = document.getElementById("numpad"); //gets the numpad element
+    display.textContent = displayValue;
 }
