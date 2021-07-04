@@ -5,27 +5,37 @@ let secondOperator = null;
 let result = null;
 let displayValue = '0';
 
-updateDisplay();
-
-function operate(op, a, b){
-    if(op === '+'){
-        return a + b;
-    }else if(op === '-'){
-        return a - b;
-    }else if(op === 'x'){
-        return a * b;
-    }else if(op === '/'){
-        if(b === 0){
-            return 'oof';
-        } else{
-            return a / b;
-        }
+window.addEventListener("keydown", async function (e){
+    if(e.key === '*'){
+        populateDisplay('x');
+        const aux = document.getElementById('x');
+        aux.classList.add('keyboard-hover');
+        await sleep(100);
+        aux.classList.remove('keyboard-hover');
+    } else if(e.key === 'Enter'){
+        populateDisplay('=');
+        const aux = document.getElementById('=');
+        aux.classList.add('keyboard-hover');
+        await sleep(100);
+        aux.classList.remove('keyboard-hover');
+    } else {
+        populateDisplay(e.key);
+        const aux = document.getElementById(e.key);
+        aux.classList.add('keyboard-hover');
+        await sleep(100);
+        aux.classList.remove('keyboard-hover');
     }
+});
+
+function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 document.addEventListener('click', function(e){
     populateDisplay(e.target.id);
 });
+
+updateDisplay();
 
 function populateDisplay(id){
     if(!isNaN(parseInt(id))){ // if its a number
@@ -51,6 +61,22 @@ function populateDisplay(id){
     } else if(id === 'Del'){
         inputDel();
         updateDisplay();
+    }
+}
+
+function operate(op, a, b){
+    if(op === '+'){
+        return a + b;
+    }else if(op === '-'){
+        return a - b;
+    }else if(op === 'x'){
+        return a * b;
+    }else if(op === '/'){
+        if(b === 0){
+            return 'oof';
+        } else{
+            return a / b;
+        }
     }
 }
 
@@ -128,8 +154,9 @@ function inputEqual(){
 function updateDisplay(){
     let display = document.getElementById("numpad"); //gets the numpad element
     display.textContent = displayValue;
-    if(displayValue.length > 9){
-        display.textContent = displayValue.substring(0, 10);
+    if(displayValue.toString().length > 9){
+        console.log("long boi");
+        display.textContent = displayValue.toString().substring(0, 10);
     }
 }
 
