@@ -21,9 +21,11 @@ window.addEventListener("keydown", async function (e){
     } else {
         populateDisplay(e.key);
         const aux = document.getElementById(e.key);
-        aux.classList.add('keyboard-hover');
-        await sleep(100);
-        aux.classList.remove('keyboard-hover');
+        if(aux){
+            aux.classList.add('keyboard-hover');
+            await sleep(100);
+            aux.classList.remove('keyboard-hover');
+        }
     }
 });
 
@@ -55,7 +57,6 @@ function populateDisplay(id){
         inputPercentage();
         updateDisplay();
     } else if(id === 'C'){ // if its the Clear button
-        console.log("nose");
         clearDisplay();
         updateDisplay();
     } else if(id === 'Del'){
@@ -155,7 +156,6 @@ function updateDisplay(){
     let display = document.getElementById("numpad"); //gets the numpad element
     display.textContent = displayValue;
     if(displayValue.toString().length > 9){
-        console.log("long boi");
         display.textContent = displayValue.toString().substring(0, 10);
     }
 }
